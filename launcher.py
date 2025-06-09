@@ -5,11 +5,13 @@ import os
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-VERSOES_URL = "https://pastebin.com/raw/gWf8ZxuG"  # JSON com as versões
+# URL raw do seu arquivo versions.json no GitHub
+VERSOES_URL = "https://raw.githubusercontent.com/Heitorzws1233/versions/main/versions.json"
 
 def baixar_textura(url, destino):
     try:
         resposta = requests.get(url)
+        resposta.raise_for_status()
         with zipfile.ZipFile(io.BytesIO(resposta.content)) as z:
             z.extractall(destino)
         messagebox.showinfo("Sucesso", "Textura instalada com sucesso!")
@@ -28,7 +30,9 @@ def iniciar_download(versoes, versao_selecionada):
 
 def carregar_versoes():
     try:
-        dados = requests.get(VERSOES_URL).json()
+        resposta = requests.get(VERSOES_URL)
+        resposta.raise_for_status()
+        dados = resposta.json()
         return dados["versoes"], dados["atual"]
     except Exception as e:
         messagebox.showerror("Erro", f"Falha ao obter as versões:\n{str(e)}")
