@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 # URL raw do seu arquivo versions.json no GitHub
-VERSOES_URL = "https://raw.githubusercontent.com/Heitorzws1233/versions/main/versions.json"
+VERSOES_URL = "https://raw.githubusercontent.com/Heitorzws1233/versions/versions.json"
 
 def baixar_textura(url, destino):
     try:
